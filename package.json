@@ -1,0 +1,30 @@
+{
+  "name": "top-albums",
+  "version": "1.0.0",
+  "description": "A serverless web application for Spotify music discovery",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "install:all": "npm install && cd frontend && npm install",
+    "clean": "rm -rf frontend/dist",
+    "test": "cd frontend && npm test"
+  },
+  "keywords": [
+    "spotify",
+    "music",
+    "serverless",
+    "react",
+    "github-pages"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
