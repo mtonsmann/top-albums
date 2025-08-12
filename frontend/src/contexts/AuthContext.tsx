@@ -59,8 +59,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [])
 
   const login = async () => {
-    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID || 'MISSING_CLIENT_ID'
     const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI || 'https://mtonsmann.github.io/top-albums/callback'
+    
+    if (clientId === 'MISSING_CLIENT_ID') {
+      console.error('Spotify Client ID not found. Check your .env.local file.')
+      return
+    }
     
     // Generate PKCE code verifier and challenge
     const codeVerifier = generateRandomString(128)
