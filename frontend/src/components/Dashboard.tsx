@@ -64,15 +64,6 @@ const Dashboard: React.FC = () => {
     navigate('/')
   }
 
-  const getTimeRangeLabel = (range: string) => {
-    switch (range) {
-      case 'short_term': return 'Last 4 Weeks'
-      case 'medium_term': return 'Last 6 Months'
-      case 'long_term': return 'All Time'
-      default: return 'Last 6 Months'
-    }
-  }
-
   if (!isAuthenticated) {
     return null
   }
