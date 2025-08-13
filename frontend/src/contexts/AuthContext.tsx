@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { getBaseRedirectUri } from '../utils/redirectUri'
 
 interface AuthContextType {
   isAuthenticated: boolean
@@ -60,12 +61,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async () => {
     const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID || 'MISSING_CLIENT_ID'
-    const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI || 'https://mtonsmann.github.io/top-albums/callback'
+    // Compute the correct base redirect URI dynamically (dev or prod)
+    const redirectUri = getBaseRedirectUri()
     
     if (clientId === 'MISSING_CLIENT_ID') {
       console.error('Spotify Client ID not found. Check your .env.local file.')
       return
     }
+    
+    console.log('Starting Spotify login...')
+    console.log('Client ID:', clientId)
+    console.log('Redirect URI:', redirectUri)
     
     // Generate PKCE code verifier and challenge
     const codeVerifier = generateRandomString(128)
@@ -77,6 +83,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const scope = 'user-top-read user-read-private user-read-email'
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&code_challenge_method=S256&code_challenge=${codeChallenge}&show_dialog=true`
     
+    console.log('Redirecting to Spotify auth URL:', authUrl)
     window.location.href = authUrl
   }
 
