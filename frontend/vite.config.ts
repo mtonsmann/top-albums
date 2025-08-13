@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Required for GitHub Pages when deploying under /top-albums/
+  base: '/top-albums/',
   plugins: [react()],
   server: {
     port: 3000,
