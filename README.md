@@ -5,7 +5,8 @@ A modern web application that allows users to log in with their Spotify accounts
 ## Features (Current Version)
 
 - 🔐 **Spotify OAuth Authentication** - Secure login with Spotify accounts using PKCE Flow
-- 🎵 **Top Songs Display** - View your most-listened tracks with beautiful album artwork
+- 🎵 **Top Albums from Your Songs (Current Year)** - We infer your likely top albums this year from your top songs
+- 📄 **Methodology Disclosure** - In-app expandable section explaining how album rankings are computed
 - 📱 **Responsive Design** - Works perfectly on desktop and mobile devices
 - 🚀 **GitHub Pages Hosting** - Free hosting with automated deployments
 - ⚡ **Modern Tech Stack** - Built with React, TypeScript, and Vite
@@ -96,11 +97,12 @@ top-albums/
 5. App exchanges code for access token using PKCE
 6. User can now view their top songs
 
-### Top Songs Display
-- Fetches user's top tracks from Spotify API
-- Supports different time ranges (4 weeks, 6 months, all time)
-- Beautiful grid layout with album artwork
-- Links directly to Spotify for each track
+### Album Ranking Methodology
+- We fetch your top tracks (user-selectable volume, paged in batches of 50)
+- Filter to tracks where the album release date starts with the current year (YYYY)
+- Group tracks by album; each track contributes a rank-based weight (higher-ranked songs contribute more)
+- Albums are sorted by total score, then by number of contributing tracks, then best individual song rank
+- Albums with only one contributing top song are excluded
 
 ## Development
 
@@ -137,6 +139,7 @@ The GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically:
 ## Future Features
 
 - [ ] **Album Recommendations** - Suggest albums based on top songs
+- [ ] **Followed Artists Releases** - List albums released this year by artists you follow that are missing from your top albums
 - [ ] **Music Discovery** - Find new artists and genres
 - [ ] **Playlist Creation** - Generate playlists from recommendations
 - [ ] **Social Features** - Share music taste with friends
