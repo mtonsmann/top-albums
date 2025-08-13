@@ -41,7 +41,7 @@ jobs:
           npm run build
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-          VITE_SPOTIFY_REDIRECT_URI: https://mtonsmann.github.io/top-albums/#/callback
+          VITE_SPOTIFY_REDIRECT_URI: https://mtonsmann.github.io/top-albums/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
