@@ -7,6 +7,7 @@ A modern web application that allows users to log in with their Spotify accounts
 - 🔐 **Spotify OAuth Authentication** - Secure login with Spotify accounts using PKCE Flow
 - 🎵 **Top Albums from Your Songs (Current Year)** - We infer your likely top albums this year from your top songs
 - 📄 **Methodology Disclosure** - In-app expandable section explaining how album rankings are computed
+- 📤 **Share Your List** - Copy your ranked top albums as plain text for easy sharing
 - 📱 **Responsive Design** - Works perfectly on desktop and mobile devices
 - 🚀 **GitHub Pages Hosting** - Free hosting with automated deployments
 - ⚡ **Modern Tech Stack** - Built with React, TypeScript, and Vite
