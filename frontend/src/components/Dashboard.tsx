@@ -36,11 +36,26 @@ const Dashboard: React.FC = () => {
   const [topTracks, setTopTracks] = useState<Track[]>([])
   const [loading, setLoading] = useState(true)
   const [timeRange, setTimeRange] = useState<'short_term' | 'medium_term' | 'long_term'>('medium_term')
-	const [numToFetch, setNumToFetch] = useState<number>(250)
+        const [numToFetch, setNumToFetch] = useState<number>(250)
   const currentYear = new Date().getFullYear()
   const [topAlbums, setTopAlbums] = useState<AlbumEntry[]>([])
   const [showTracks, setShowTracks] = useState<boolean>(false)
   const [showMethodology, setShowMethodology] = useState<boolean>(false)
+
+  const handleShare = () => {
+    const lines = topAlbums.map(
+      (album, idx) => `${idx + 1}. ${album.name} - ${album.artists.join(', ')}`
+    )
+    const text = `My Top Albums of ${currentYear}\n\n${lines.join('\n')}`
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert('Top albums copied to clipboard!')
+      })
+      .catch((err) => {
+        console.error('Failed to copy top albums:', err)
+      })
+  }
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -201,9 +216,16 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div style={{ marginBottom: '1rem' }}>
-          <button className="logout-btn" onClick={() => setShowMethodology(m => !m)}>
-            {showMethodology ? 'Hide methodology' : 'Show methodology'}
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <button className="logout-btn" onClick={() => setShowMethodology(m => !m)}>
+              {showMethodology ? 'Hide methodology' : 'Show methodology'}
+            </button>
+            {!loading && topAlbums.length > 0 && (
+              <button className="logout-btn" onClick={handleShare}>
+                Copy top albums
+              </button>
+            )}
+          </div>
           {showMethodology && (
             <div style={{ marginTop: '0.75rem', background: 'var(--surface)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
